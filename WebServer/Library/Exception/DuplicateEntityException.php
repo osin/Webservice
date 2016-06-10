@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * @author: Housseini Toumani
  * @package Osin/Tools
  * @link https://github.com/Osin/Tools

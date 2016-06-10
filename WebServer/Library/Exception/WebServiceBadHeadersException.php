@@ -1,7 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: user
+ * @author: Housseini Toumani
+ * @package Osin/Tools
+ * @link https://github.com/Osin/Tools
  * Date: 28/08/14
  * Time: 18:05
  */
