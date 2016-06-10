@@ -24,6 +24,7 @@ class Curl {
     protected $url;
     protected $httpMethod;
     protected $postFields;
+    private $data;
     private $states = array();
     private $curlResult;
     private $curlInfo;
@@ -41,7 +42,16 @@ class Curl {
         return $this;
     }
 
+    function getUrl(){
+        return $this->url;
+    }
+
+    function getHttpMethod(){
+        return $this->httpMethod;
+    }
+
     function setData($data, $contentType){
+        $this->data = $data;
         $this->headers['Content-type'] = $contentType;
         switch ($contentType) {
             case self::$ContentTypeFormData:
@@ -57,8 +67,17 @@ class Curl {
         return $this;
     }
 
+    function getData(){
+        return $this->data;
+    }
+
+    function getPostFields(){
+        return $this->postFields;
+    }
+
     protected function afterSetData(){
         $this->setContentLength();
+        return $this;
     }
 
     private function setContentLength(){
@@ -70,6 +89,7 @@ class Curl {
      * this method is call in Curl::exec() after curl_init()
      */
     protected function beforeExec(){
+        return $this;
     }
 
     function exec(){
@@ -161,29 +181,5 @@ class Curl {
     public function getHeaders()
     {
         return $this->headers;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHttpMethod()
-    {
-        return $this->httpMethod;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPostFields()
-    {
-        return $this->postFields;
     }
 }
