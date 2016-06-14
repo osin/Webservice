@@ -1,0 +1,8 @@
+<?php
+#Mandatory Configuration
+define('__WSVERSION__', '1.0');
+define('__OUTPUT_TYPE__', 'json');
+define('__ROOT_DIR__', dirname(__FILE__)); //if you want to use "require" in class, this is the root defined
+define('__MAX_ENTRIES__PER__CALL__', 20); //the number of elements show in a list
+define('__DEFAULT__LANGUAGE__', 'en'); // When client does not provide language, we put by default this language
+define('__PROTOCOLE__', isset($_SERVER['HTTPS']) ? 'https://' : 'http://');
