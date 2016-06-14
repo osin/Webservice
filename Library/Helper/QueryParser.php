@@ -69,7 +69,7 @@ abstract class QueryParser
                 || strtoupper($args['order_type']) == 'DESC'
             )
         )
-            $orderType = mysql_escape_string($args['order_type']);
+            $orderType = addslashes($args['order_type']);
         else
             $orderType = 'ASC';
         $orderBuildSQL = array();
@@ -79,9 +79,9 @@ abstract class QueryParser
         $orderArgs = self::replaceFieldName($args['order'], $filters);
         foreach ($orderArgs as $key => $orderParam) {
             if ($key == 0)
-                $orderBuildSQL[] = mysql_escape_string($orderParam) .' ' . mysql_escape_string($orderType);
+                $orderBuildSQL[] = addslashes($orderParam) .' ' . addslashes($orderType);
             else
-                $orderBuildSQL[] = mysql_escape_string($orderParam);
+                $orderBuildSQL[] = addslashes($orderParam);
         }
         $orderSQL = implode(', ', $orderBuildSQL);
         return $orderSQL;
@@ -123,8 +123,8 @@ abstract class QueryParser
      static function getWhere($args, $filters)
     {
         $where = '';
-        $whereOperators = isset($args['where_operator']) ? mysql_escape_string($args['where_operator']) : ' AND';
-        $whereSubOperator = isset($args['where_sub_operator']) ? mysql_escape_string($args['where_sub_operator']) : ' OR';
+        $whereOperators = isset($args['where_operator']) ? addslashes($args['where_operator']) : ' AND';
+        $whereSubOperator = isset($args['where_sub_operator']) ? addslashes($args['where_sub_operator']) : ' OR';
         $whereFilters = array_intersect_key($args, $filters);
         if(count($whereFilters)){
             $whereFiltersCounter = 0;
@@ -136,7 +136,7 @@ abstract class QueryParser
                     if($key == 0){
                         $where .= ' ('; //isolate parameters by field
                     }
-                    $where .= " {$filters[$whereField]} = '".mysql_escape_string($whereValue)."'";
+                    $where .= " {$filters[$whereField]} = '".mysql_real_escape_string($whereValue)."'";
                     if(count($whereValues) > 1 && ($key+1) != count($whereValues))
                         $where .= $whereSubOperator;
                     if($key+1 == count($whereValues)){
