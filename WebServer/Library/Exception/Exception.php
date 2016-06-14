@@ -34,7 +34,7 @@ class Exception extends \Exception {
         $output = WebServiceOutput::getInstance();
         $output->addError(-1, $error);
         if($error['type'] == 1){
-            if(HeaderHandler::getStatus() < 400)
+            if(HeaderHandler::getStatus() < 500)
                 HeaderHandler::setStatus(500);
             $output->write();
             exit();
