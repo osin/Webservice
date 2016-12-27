@@ -16,12 +16,20 @@ use Library\Handler\HeaderHandler;
 
 class Exception extends \Exception {
 
+    /**
+     * Exception constructor.
+     * Construct an exception with a message. Should be extend to use message and code
+     *
+     * @param string $message
+     * @param int $code
+     * @param Exception|null $previous
+     */
     public function __construct($message = "", $code = -1, Exception $previous = null){
         $output = WebServiceOutput::getInstance();
         $output
             ->setState(WebServiceOutput::errorState)
             ->addError($code, $message);
-        parent::__construct($message, $code);
+        parent::__construct($message, $code, $previous);
     }
 
     /**

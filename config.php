@@ -9,5 +9,4 @@ define('__PROTOCOLE__', isset($_SERVER['HTTPS']) ? 'https://' : 'http://');
 define('__TIMEZONE__', 'Europe/Paris');
 
 date_default_timezone_set(__TIMEZONE__);
-
-define('__EXPIRE_DURATION__', $timezone;
+define('__EXPIRE_DURATION__', (new \DateTime())->getTimestamp());

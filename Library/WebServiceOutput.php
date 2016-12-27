@@ -144,9 +144,8 @@ class WebServiceOutput {
         $output->wsresponse->version = __WSVERSION__;
         $output->wsresponse->state = $this->state;
         $output->wsresponse->errors = $this->errors;
-        $output->wsresponse->client = array('correlation_id' => $id);
+        $output->wsresponse->client = array('ext_session_id' => $id);
         $wsOutput = (object) array_merge((array) $output, (array) $this->message);
-        //@todo: gerer les handlers comme le xmlHandler
         $result = call_user_func_array('Library\Handler\\'.ucfirst(__OUTPUT_TYPE__).'Handler::encode', array($wsOutput));
         if($return)
             return $result;

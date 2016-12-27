@@ -133,6 +133,6 @@ class WebServiceFactory
      */
     private function getWebServiceFile(WebServiceDriver $driver)
     {
-        return $driver->getWebServicePath() . $driver->getMethod() . '.php';
+        return "services/{$driver->getWebServicePath()}{$driver->getMethod()}.php";
     }
 }

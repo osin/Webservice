@@ -22,5 +22,6 @@ class SecuredArea extends Security{
      *
      */
     public function checkAccess(){
+        throw new NotYetImplementedException();
     }
 }
