@@ -25,6 +25,6 @@ You should provide theses arguments to use the api in cli mod
 
         $longopts  = array(
             "path:", //exemple /{securityArea}/{entities}/{identity}/{entitiesChild1}/ etc....
-            "method:",
-            "data:"
+            "method:", an HTTP METHOD
+            "data:" Data can be passe by many way, using http you should pass it in the body, using cli it's must be provide by data = {data}
         );
