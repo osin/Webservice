@@ -20,7 +20,7 @@ Autoloader::register();
 Exception::registerExceptionHandler();
 
 HeaderHandler::setNoCacheControl();
-HeaderHandler::setExpire(new \DateTime());
+HeaderHandler::setExpire((new DateTime())->setTimestamp(__EXPIRE_DURATION__));
 HeaderHandler::setContentType(__OUTPUT_TYPE__);
 
 global $auth, $driver, $wsFactory; //theses objects are used anywhere in application
