@@ -13,13 +13,18 @@ soon.
 @license GNU Lesser General Public License
 @since 0.1
 @version $Revision 0.1
- 
+
+### Please fill config.php.default => config.php
+
+As soon as filled you must implement a Security Area Method. I gave you two SecurityArea, public and secure. You can decide which one you want to call.
+
+
 You should provide theses arguments to use the api in cli mod
 
         $shortopts = "p:m:d:";
 
         $longopts  = array(
-            "path:",
+            "path:", //exemple /{securityArea}/{entities}/{identity}/{entitiesChild1}/ etc....
             "method:",
             "data:"
         );
