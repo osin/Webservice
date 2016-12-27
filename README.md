@@ -14,3 +14,12 @@ soon.
 @since 0.1
 @version $Revision 0.1
  
+You should provide theses arguments to use the api in cli mod
+
+        $shortopts = "p:m:d:";
+
+        $longopts  = array(
+            "path:",
+            "method:",
+            "data:"
+        );
