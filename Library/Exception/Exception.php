@@ -40,7 +40,9 @@ class Exception extends \Exception {
     static function exceptionHandler() {
         $error = error_get_last();
         $output = WebServiceOutput::getInstance();
-        $output->addError(-1, $error);
+        if(__VERBOSE_ERROR__ === true){
+            $output->addError(-1, $error);
+        }
         if($error['type'] == 1){
             if(HeaderHandler::getStatus() < 500)
                 HeaderHandler::setStatus(500);

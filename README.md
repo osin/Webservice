@@ -28,3 +28,23 @@ You should provide theses arguments to use the api in cli mod
             "method:", an HTTP METHOD
             "data:" Data can be passe by many way, using http you should pass it in the body, using cli it's must be provide by data = {data}
         );
+        
+        
+# Install
+First please copy every dist to non dist ext files. Exemple config.php.dist should become config.php
+* .htaccess.dist => .htaccess
+* .config.php.dist => config.php
+
+
+##.htAccess installation
+HtAccess define entrypoint to get all the service. We rewrite all urls to specific endpoint which is bootstrap.php.
+You can define your own pattern url for this specific endpoint.
+We also add instruction to no index all files.
+You can remove or manage freely you htaccess according to your fairs uses, security restrictions or/and vhosts
+
+##Domain installation
+
+After that you should define a domaine. A domain is a global path for an specific project, use case or application
+Ex: domain public for services from publics domaines or domain backoffice for backoffice services.
+
+To define a domaine 

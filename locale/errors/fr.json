@@ -1,8 +1,8 @@
 {
-    "AreaNotFoundException": "Le domaine de webservice %s n'existe pas",
+    "AreaNotFoundException": "Le domaine de webservice %s n'existe pas ou son système de securité n'est pas implémenté",
     "EntityNotFoundException": "l'entité %s identifié par %s n'existe pas",
     "WebServiceNotFoundException": "Le web service %s n'existe pas dans le fichier %s",
-    "NotYetImplementedException":"Il semblerait que vous fassiez appel a du code qui n'est pas encore implémenté",
+    "NotYetImplementedException":"Il semblerait que vous faites appel a du code qui n'est pas encore implémenté",
     "OutputMissingPropertiesException":"Pour afficher sur la sortie il faut fournir un code, un etat de service, un type et une version de service. Un de ces éléments manquent",
     "WebServiceBadHeadersException":"Les entêtes HTTP envoyées ne correspondent pas",
     "WebServiceNotImplementedException":"Le web service appelé n'est pas encore implémenté",

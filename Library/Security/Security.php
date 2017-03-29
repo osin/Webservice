@@ -5,7 +5,10 @@
  * @link https://github.com/Osin/Tools
  */
 namespace Library\Security;
+
+use Library\Autoloader;
 use Library\Exception\AreaNotFoundException;
+use Library\Exception\NotYetImplementedException;
 use Library\WebServiceDriver;
 use Library\Handler\HeaderHandler;
 
@@ -18,15 +21,16 @@ use Library\Handler\HeaderHandler;
  */
 abstract class Security
 {
-    const secureArea = 'secure';
-    const publicArea = 'public';
-    const systemArea = 'system';
+    const DEFAULT_SECURITY = 'system';
 
     /**
      * @var WebServiceDriver $driver
      */
     protected $driver;
 
+    /**
+     * @var unique client identifier
+     */
     protected $id;
 
     /**Return security object
@@ -34,34 +38,38 @@ abstract class Security
      * @param \Library\WebServiceDriver $driver
      *
      * @return PublicArea|SecuredArea
-     * @throws \Exception
+     * @throws AreaNotFoundException
      */
-    static function getSecurity(WebServiceDriver $driver)
+    static function getSecurity(WebServiceDriver $driver, $id)
     {
         //recupère le domain public ou secure
         $area = $driver->getGarbage()->getArea();
-        switch ($area) {
-            case self::secureArea:
-                return new SecuredArea($driver);
-            case self::publicArea:
-                return new PublicArea($driver);
-            case self::systemArea:
-                return new SystemArea($driver);
-            default:
-                HeaderHandler::setStatus(404);
-                throw new AreaNotFoundException($area);
+        $className = __NAMESPACE__ . __NAMESPACE_SEPARATOR__ .ucfirst($area . 'Security');
+
+        if (file_exists(Autoloader::getFilePathFromNameSpacedClass($className))) {
+            return new $className($driver, $id);
         }
+
+        HeaderHandler::setStatus(404);
+        throw new AreaNotFoundException($area);
     }
 
 
-
-
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    /** You must implement this function by domain
-     * @return mixed
+    function __construct(WebServiceDriver $driver)
+    {
+        $this->driver = $driver;
+    }
+
+    /**
+     *
      */
-    abstract function checkAccess();
+    public function checkAccess()
+    {
+        throw new NotYetImplementedException();
+    }
 }

@@ -1,9 +1,5 @@
 <?php
-/**
- * Bootstrap to access each webservice
- * (1) If you want to enable new web service you have to put in your .htaccess or vhost:
- *       RewriteRule ^api/(.*)?$    path/from/root/to/bootstrap.php?components=$1                         [QSA,L]
- */
+define('__START_EXECUTION_TIME__', microtime(true));
 require 'config.php';
 chdir(__ROOT_DIR__); // allow to call from whatever path
 require 'Library/Autoloader.php';
@@ -29,7 +25,7 @@ global $auth, $driver, $wsFactory; //theses objects are used anywhere in applica
 $driver = new WebServiceDriver(__OUTPUT_TYPE__, __DEFAULT__LANGUAGE__);
 
 // Retrieving correct security agent (by domain)
-$auth = Security::getSecurity($driver);
+$auth = Security::getSecurity($driver, HeaderHandler::getHeaderFromClient("User-Agent"));
 $auth->checkAccess();
 
 // Getting service called

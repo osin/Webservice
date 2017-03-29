@@ -158,7 +158,7 @@ class WebServiceGarbage
         if (empty($last_schemePart)) {
             array_pop($schemeParts);
         }
-        //for example the url /api/secure/accounts/0123456789/case/9876543210/calls/123/notes/11
+        //for example the url is secure/accounts/0123456789/case/9876543210/calls/123/notes/11
         switch (count($schemeParts)) {
             case 9:
                 $this->thirdChildEntityId = $schemeParts[8]; //11 as note id

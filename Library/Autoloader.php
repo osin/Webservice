@@ -25,24 +25,30 @@ class Autoloader
      * Autoloading system
      * Transform namespace structure into directory structure (\NS1\NS2\NS3\className will be
      * search into __DIR__ . '/NS1/NS2/NS3/className.php').
+     * @param $class class to require
+     * @throws \Exception throw basic \Exception
      */
     static public function autoload($class)
     {
         // Autoload only "sub-namespaced" class
         if (strpos($class, __NAMESPACE__.'\\') === 0)
         {
-            // Delete current namespace from class one
-            $relative_NS     = str_replace(__NAMESPACE__, '', $class);
-            // Translate namespace structure into directory structure
-            $translated_path = str_replace('\\', '/', $relative_NS);
-            // Load class
-            $path = __DIR__ . '/' . $translated_path . '.php';
-
+            $path = self::getFilePathFromNameSpacedClass($class);
             if(file_exists($path))
                 require $path;
             else
-                throw new \Exception('FILE NOT FOUND'.$path);
+                throw new \Exception('FILE NOT FOUND '.$path);
 
         }
+    }
+
+    static public function getFilePathFromNameSpacedClass($nameSpacedClassName) {
+        // Delete current namespace from class one
+        $relativeNameSpace     = str_replace(__NAMESPACE__, '', $nameSpacedClassName);
+        // Translate namespace structure into directory structure
+        $translatedPath = str_replace('\\', '/', $relativeNameSpace);
+        // Load class
+        $path = __DIR__ . '/' . $translatedPath . '.php';
+        return $path;
     }
 }

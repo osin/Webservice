@@ -139,12 +139,13 @@ class WebServiceOutput {
         $id = (is_subclass_of($auth, 'Library\Security\Security'))? $auth->getId():null;
         //@todo: comment controler que tout champs requis sont affichés?
         //@todo: eviter de créer un stdClass mais plutot un ObjectValue adapté
-        $output = new \stdClass();
-        $output->wsresponse = new \stdClass();
-        $output->wsresponse->version = __WSVERSION__;
-        $output->wsresponse->state = $this->state;
-        $output->wsresponse->errors = $this->errors;
-        $output->wsresponse->client = array('ext_session_id' => $id);
+
+        $output= new \stdClass();
+        $output->version = __WSVERSION__;
+        $output->state = $this->state;
+        $output->errors = $this->errors;
+        $output->client = array('ext_session_id' => $id);
+        $output->time = microtime(true) - __START_EXECUTION_TIME__ . " sec";
         $wsOutput = (object) array_merge((array) $output, (array) $this->message);
         $result = call_user_func_array('Library\Handler\\'.ucfirst(__OUTPUT_TYPE__).'Handler::encode', array($wsOutput));
         if($return)

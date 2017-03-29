@@ -1,5 +1,5 @@
 {
-    "AreaNotFoundException": "The webservice area %s does not exist",
+    "AreaNotFoundException": "The webservice area %s does not exist or his security process is not implemented",
     "EntityNotFoundException": "Entity %s identified by parameter %s does not exist",
     "WebServiceNotFoundException": "Webservice %s is not found in file %s",
     "NotYetImplementedException":"This part of code, function or class is not yet implemented",
